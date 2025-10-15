@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reload Confirmation Only</title>
+  <script>
+    let isReloading = false;
 
+    // Detect when the user clicks the reload button or presses F5 / Ctrl+R
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+        isReloading = true;
+      }
+    });
+
+    window.addEventListener('beforeunload', (event) => {
+      if (isReloading) {
+        event.preventDefault();
+        event.returnValue = "Are you sure you want to reload this page?";
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>My GitHub Site</h1>
+  <p>Try pressing F5 or Ctrl+R — it will ask before reloading.</p>
+</body>
+</html>
